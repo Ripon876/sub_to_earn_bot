@@ -10,7 +10,7 @@
   "author": "MD Ripon Islam",
   "license": "ISC",
   "dependencies": {
-    "dot-env": "0.0.1",
+    "dotenv": "^10.0.0",
     "node-telegram-bot-api": "^0.54.0",
     "nodemon": "^2.0.12"
   }

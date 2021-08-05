@@ -1,64 +1,37 @@
+var dotenv         = require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
-
-// replace the value below with the Telegram token you receive from @BotFather
-const token = '1909923497:AAG1GUNjun8KfQa2W92wf4MVOTWlXPAmZ5g';
-
-// Create a bot that uses 'polling' to fetch new updates
+const token = process.env.TELEGRAM_HTTP_TOKEN;
 const bot = new TelegramBot(token, {polling: true});
 
-// Matches "/echo [whatever]"
-// bot.onText(/\/hi/, (msg, match) => {
-//   // 'msg' is the received Message from Telegram
-//   // 'match' is the result of executing the regexp above on the text content
-//   // of the message
-
-//   const chatId = msg.chat.id;
-//   const resp = match[1]; // the captured "whatever"
-
-//   // send back the matched "whatever" to the chat
-//   bot.sendMessage(chatId, resp);
-// });
-
-// Listen for any kind of message. There are different kinds of
-// messages.
-// bot.on('message', (msg) => {
-//   const chatId = msg.chat.id;
-
-//   // send a message to the chat acknowledging receipt of their message
-//   bot.sendMessage(chatId, 'Received your message');
-// });
 
 
-let users = []
+
+let users = [];
+var ref = [21344,32432,32432,56445,435465,67545,345452]
 
 bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id
   users.push(chatId)
 
   bot.sendMessage(chatId, 'Welcome to our family. Hope you were well. Follow the instractions to complete registraion');
-  bot.sendMessage(chatId, 'Are you refered by any user',{
+  bot.sendMessage(chatId, 'Do you have any invitation/referal code ?',{
                reply_markup: {
-   keyboard: [
+   inline_keyboard: [
            [
                {
                    text: 'YES',
                    callback_data: "yes"
-               }
-           ],[{
+               },{
                    text: 'NO',
                    callback_data: "no"
-               }]
+               }
+           ]
        ]
            }
   })
 
 })
 
-
-// bot.onText(/\/mycommand1/, (msg, match) => {
-// const chatId = msg.chat.id;
-// console.log(chatId)
-// bot.sendMessage(chatId,"Good choice");
 
 // })
 
@@ -68,17 +41,7 @@ bot.on('message',function(msg) {
 
 
 
-  var robot = "I'm robot";
-  if (msg.text.indexOf(robot) === 0) {
-    bot.sendMessage(msg.chat.id, "Yes I'm robot but not in that way!");
-}
 
-var location = "location";
-    if (msg.text.indexOf(location) === 0) {
-        bot.sendLocation(msg.chat.id,44.97108, -104.27719);
-        bot.sendMessage(msg.chat.id, "Here is the point");
-
-    }   
 
 
     if (msg.text.indexOf("YES") === 0) {
@@ -99,3 +62,35 @@ var location = "location";
 
 
 })
+
+
+bot.on("callback_query", (callbackQuery) => {
+    const msg = callbackQuery.message;
+    const msg2 = callbackQuery.data;
+   if(msg2 === 'yes'){
+        bot.answerCallbackQuery(callbackQuery.id)
+    .then(() => bot.sendMessage(msg.chat.id, "Enter the code"))
+    .then(() =>  {
+      // console.log("have referal code");
+      bot.on('message',function(msg) {
+        var chatId = msg.chat.id;
+    console.log(msg.text)
+      if(ref.indexOf(Number(msg.text)) !== -1){
+       bot.sendMessage(chatId, "Bonuse added succesfully")
+      }else {
+         bot.sendMessage(chatId, "Wrong invitation /  referal code")
+      }
+   
+
+      })
+    })
+
+   }else if(msg2 === 'no') {
+      bot.answerCallbackQuery(callbackQuery.id)
+    .then(() => bot.sendMessage(msg.chat.id, "Okey"))
+    .then(() => {
+      // console.log("don't have referal code")
+    })
+   }
+
+}); 
