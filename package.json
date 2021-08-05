@@ -1,0 +1,17 @@
+{
+  "name": "sub_to_earn_bot",
+  "version": "1.0.0",
+  "description": "this is a telegram bot created by MD Ripon Islam",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "devStart": "nodemon app.js"
+  },
+  "author": "MD Ripon Islam",
+  "license": "ISC",
+  "dependencies": {
+    "dot-env": "0.0.1",
+    "node-telegram-bot-api": "^0.54.0",
+    "nodemon": "^2.0.12"
+  }
+}
