@@ -7,7 +7,7 @@ const bot = new TelegramBot(token, {polling: true});
 
 
 let users = [];
-var ref = [21344,32432,32432,56445,435465,67545,345452]
+var ref = [21344,32432,32432,56445,43546,67545,35452]
 
 bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id
@@ -41,7 +41,7 @@ bot.on('message',function(msg) {
 
 
 
-
+ 
 
 
     if (msg.text.indexOf("YES") === 0) {
@@ -74,11 +74,11 @@ bot.on("callback_query", (callbackQuery) => {
       // console.log("have referal code");
       bot.on('message',function(msg) {
         var chatId = msg.chat.id;
-    console.log(msg.text)
-      if(ref.indexOf(Number(msg.text)) !== -1){
+      if(ref.indexOf(Number(msg.text)) !== -1 && msg.text.length == 5){
        bot.sendMessage(chatId, "Bonuse added succesfully")
-      }else {
-         bot.sendMessage(chatId, "Wrong invitation /  referal code")
+      }
+      if ( msg.text.length !== 5  ) {
+        bot.sendMessage(chatId, "Wrong invitation /  referal code");
       }
    
 
