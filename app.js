@@ -2,6 +2,8 @@ var dotenv         = require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const token = process.env.TELEGRAM_HTTP_TOKEN;
 const bot = new TelegramBot(token, {polling: true});
+var emoji = require('node-emoji').emoji;
+
 
 
 
@@ -12,7 +14,8 @@ var ref = [21344,32432,32432,56445,43546,67545,35452]
 bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id
   users.push(chatId)
-
+bot.sendMessage(chatId,yin_yang)
+// bot.sendMessage(chatId,`hi ${emoji.heart}`)
   bot.sendMessage(chatId, 'Welcome to our family. Hope you were well. Follow the instractions to complete registraion');
   bot.sendMessage(chatId, 'Do you have any invitation/referal code ?',{
                reply_markup: {
