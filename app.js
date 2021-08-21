@@ -3,7 +3,15 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = process.env.TELEGRAM_HTTP_TOKEN;
 const bot = new TelegramBot(token, {polling: true});
 var emoji = require('node-emoji').emoji;
+var express = require("express");
+var app = express();
+var port = process.env.PORT || 3000;
 
+
+
+app.listen(port,function(){
+  console.log("Server started at port ..." + port);
+});
 
 
 
