@@ -19,7 +19,9 @@ app.post('/' + token, (req, res) => {
   res.sendStatus(200);
 });
 
-
+app.get("/",function(req,res) {
+    res.json(users);
+})
 
 
 
