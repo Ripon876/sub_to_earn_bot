@@ -1,19 +1,19 @@
-var dotenv      = require('dotenv').config();
+var dotenv = require('dotenv').config();
 var TelegramBot = require('node-telegram-bot-api');
-var token       = process.env.TELEGRAM_HTTP_TOKEN;
-var bot         = new TelegramBot(token, {
+var token = process.env.TELEGRAM_HTTP_TOKEN;
+var bot = new TelegramBot(token, {
     polling: true
 });
 
-var express    = require("express");
-var emoji      = require('node-emoji').emoji;
-var mongoose   = require("mongoose");
-var User       = require("./models/user");
-var cu         = require("./middlewares/checkUser");
+var express = require("express");
+var emoji = require('node-emoji').emoji;
+var mongoose = require("mongoose");
+var User = require("./models/user");
+var cu = require("./middlewares/checkUser");
 var bodyParser = require("body-parser");
-var crypto     = require("crypto-random-string");
-var app        = express();
-var port       = process.env.PORT || 3000;
+var crypto = require("crypto-random-string");
+var app = express();
+var port = process.env.PORT || 3000;
 var mongoDbStr = "mongodb://localhost:27017/sub_to_earn";
 
 mongoose.connect(mongoDbStr, {
@@ -35,12 +35,11 @@ app.get("/", function(req, res) {
 })
 
 
-
-
+var previousMessage;
 var userControlKeyBoard = {
     "parse_mode": "Markdown",
     "reply_markup": {
-        "keyboard":[
+        "keyboard": [
             [{
                 text: `Balance ${emoji.moneybag}`
             }],
@@ -96,13 +95,13 @@ bot.onText(/\/start/, (msg) => {
                         .then(function(sended) {
                             var chatId = sended.chat.id;
                             var messageId = sended.message_id;
+                            previousMessage = sended.text;
                             bot.onReplyToMessage(chatId, messageId, function(message) {
-                            
 
 
 
                                 if (message.contact.phone_number) {
-                                    
+
 
                                     var tempUser = {
                                         name: message.from.first_name + message.from.last_name,
@@ -116,18 +115,17 @@ bot.onText(/\/start/, (msg) => {
                                     User.create(tempUser, function(err, user) {
                                         if (err) console.log(err);
 
-                                        
+
                                         bot.sendMessage(chatId, "registraion complete")
-                                        .then(function () {
-                                            bot.sendMessage(sended.chat.id, "Use the commands to control your account",userControlKeyBoard)
-                                        })
+                                            .then(function() {
+                                                bot.sendMessage(sended.chat.id, "Use the commands to control your account", userControlKeyBoard)
+                                            })
 
                                     });
-                                
-                                }else {
-                                    bot.sendMessage(chatId,"Registraion unsuccessfull")
-                                }
 
+                                } else {
+                                    bot.sendMessage(chatId, "Registraion unsuccessfull")
+                                }
 
 
 
@@ -139,7 +137,7 @@ bot.onText(/\/start/, (msg) => {
         } else {
             bot.sendMessage(chatId, "Welcome back")
                 .then(function(sended) {
-                    bot.sendMessage(sended.chat.id, "Use the commands to control your account",userControlKeyBoard)
+                    bot.sendMessage(sended.chat.id, "Use the commands to control your account", userControlKeyBoard)
                 })
         }
     })
@@ -151,24 +149,24 @@ bot.onText(/\/start/, (msg) => {
 
 
 bot.on('message', function(msg) {
-    console.log(msg)
-var chatId = msg.chat.id;
-/*
-    if (msg.text.indexOf("YES") === 0) {
 
-        bot.sendMessage(msg.chat.id, "Good to here");
+    var chatId = msg.chat.id;
+    /*
+        if (msg.text.indexOf("YES") === 0) {
 
-    } else if (msg.text.indexOf("NO") === 0) {
+            bot.sendMessage(msg.chat.id, "Good to here");
 
-        bot.sendMessage(msg.chat.id, "Sounds bad");
+        } else if (msg.text.indexOf("NO") === 0) {
 
-    }
+            bot.sendMessage(msg.chat.id, "Sounds bad");
 
-    if (msg.text.indexOf("antor") === 0) {
+        }
 
-        bot.sendMessage(msg.chat.id, "antor kemon asis..?");
+        if (msg.text.indexOf("antor") === 0) {
 
-    }*/
+            bot.sendMessage(msg.chat.id, "antor kemon asis..?");
+
+        }*/
 
     if (msg.text === 'Balance 💰') {
         // console.log(msg)
@@ -181,9 +179,9 @@ var chatId = msg.chat.id;
 
             User.find(tempUser, function(err, user) {
                 if (user.length !== 0) {
-                   
-                    
-                    bot.sendMessage(chatId, `You Balance is ${ user[0].balance}` );
+
+
+                    bot.sendMessage(chatId, `You Balance is ${ user[0].balance}`);
 
                 } else {
                     bot.sendMessage(chatId, `${emoji.x}`);
@@ -194,9 +192,9 @@ var chatId = msg.chat.id;
 
 
     }
-if(msg.text === 'Status'){
+    if (msg.text === 'Status') {
 
- (async function() {
+        (async function() {
             var tempUser = {
                 name: msg.from.first_name + msg.from.last_name,
                 username: msg.from.username,
@@ -205,10 +203,12 @@ if(msg.text === 'Status'){
 
             User.find(tempUser, function(err, user) {
                 if (user.length !== 0) {
-                   var status = "Inactive"
-                   if (user[0].status) { status = 'Active' }
-                    
-                    bot.sendMessage(chatId, `Your Account  is ${status}` );
+                    var status = "Inactive"
+                    if (user[0].status) {
+                        status = 'Active'
+                    }
+
+                    bot.sendMessage(chatId, `Your Account  is ${status}`);
 
                 } else {
                     bot.sendMessage(chatId, `${emoji.x}`);
@@ -216,10 +216,10 @@ if(msg.text === 'Status'){
             })
         })()
 
-  
-}
-if(msg.text === 'Referals 🚀 🚀'){
- (async function() {
+
+    }
+    if (msg.text === 'Referals 🚀 🚀') {
+        (async function() {
             var tempUser = {
                 name: msg.from.first_name + msg.from.last_name,
                 username: msg.from.username,
@@ -228,17 +228,43 @@ if(msg.text === 'Referals 🚀 🚀'){
 
             User.find(tempUser, function(err, user) {
                 if (user.length !== 0) {
-                    
-                    bot.sendMessage(chatId, `You have ${ user[0].referals} referals` );
+
+                    bot.sendMessage(chatId, `You have ${ user[0].referals} referals`);
 
                 } else {
                     bot.sendMessage(chatId, `${emoji.x}`);
-                    bot.sendMessage(chatId,"type /start first")
+                    bot.sendMessage(chatId, "type /start first")
                 }
             })
         })()
 
-}
+    }
+
+    if (msg.text === "Cancel" && previousMessage === "Give us your number") {
+
+        var tempUser = {
+            name: msg.from.first_name + msg.from.last_name,
+            username: msg.from.username,
+            tele_user_id: msg.from.id
+        }
+
+        User.find(tempUser, function(err, user) {
+            if (user.length !== 0) {
+
+                bot.sendMessage(chatId, `unknown command`);
+
+            } else {
+                previousMessage = '';
+                bot.sendMessage(chatId, `${emoji.x}`);
+                bot.sendMessage(chatId, "Without phone number you can't register");
+                bot.sendMessage(chatId, "type /start first to start the bot again")
+            }
+        })
+
+
+
+    }
+
 
 
 
@@ -255,4 +281,3 @@ bot.on("callback_query", (callbackQuery) => {
 bot.on("polling_error", (err) => console.log(err));
 
 // zvDKJ54987
-
