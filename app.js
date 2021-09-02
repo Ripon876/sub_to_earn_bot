@@ -14,8 +14,15 @@ var bodyParser = require("body-parser");
 var crypto = require("crypto-random-string");
 var app = express();
 var port = process.env.PORT || 3000;
-var mongoDbStr = "mongodb://localhost:27017/sub_to_earn";
+var mongoDbStr;
+if (port !== 3000) {
+    mongoDbStr = process.env.MOGNODB_URI;
 
+} else {
+    mongoDbStr = "mongodb://localhost:27017/sub_to_earn";
+}
+
+console.log(mongoDbStr)
 mongoose.connect(mongoDbStr, {
     useUnifiedTopology: true,
     useNewUrlParser: true
