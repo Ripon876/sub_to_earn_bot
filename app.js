@@ -4,7 +4,8 @@ var token = process.env.TELEGRAM_HTTP_TOKEN;
 var bot = new TelegramBot(token, {
     polling: true
 });
-
+var cron = require('node-cron');
+var request = require('request');
 var express = require("express");
 var emoji = require('node-emoji').emoji;
 var mongoose = require("mongoose");
@@ -288,3 +289,15 @@ bot.on("callback_query", (callbackQuery) => {
 bot.on("polling_error", (err) => console.log(err));
 
 // zvDKJ54987
+
+
+
+cron.schedule('*/10 * * * *', function() {
+
+
+request('https://enigmatic-river-45127.herokuapp.com/', function (error, response, body) {
+
+  console.log('body:', body); 
+});
+
+});
