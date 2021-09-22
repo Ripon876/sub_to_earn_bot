@@ -43,6 +43,12 @@ app.get("/", function(req, res) {
 })
 
 
+
+
+
+
+
+
 var previousMessage;
 var userControlKeyBoard = {
     "parse_mode": "Markdown",
@@ -68,16 +74,25 @@ let users = [];
 var ref = [21344, 32432, 32432, 56445, 43546, 67545, 35452]
 
 bot.onText(/\/start/, (msg) => {
-
     var chatId = msg.chat.id;
     var referrerID = msg.text.slice(7, 15);
     var referalID = "rf" + crypto(6).toString('hex');
+
+    if(msg.from.last_name === undefined ){
+        bot.sendMessage(chatId, "Last name not found")
+        .then(function(sended){
+            bot.sendMessage(sended.chat.id,"Please add your last name than try again")
+        })
+    }else{
+
+  console.log(referrerID);
+   
     bot.sendMessage(chatId, `hi ${emoji.heart}`)
-    console.log(referalID);
+   
     var user = {
-        name: msg.from.first_name + msg.from.last_name,
+        name: msg.from.first_name + " " +  msg.from.last_name,
         username: msg.from.username,
-        tele_user_id: msg.from.id
+        user_chat_id: msg.chat.id
     }
 
     User.find(user, function(err, user) {
@@ -96,11 +111,15 @@ bot.onText(/\/start/, (msg) => {
                 }
             };
 
-            console.log(user)
             bot.sendMessage(chatId, 'Welcome to our family. Follow the instractions to complete registraion')
-                .then(function() {
+                .then(function(sended) {
+
+                    console.log(sended);
+
+
                     bot.sendMessage(chatId, "Give us your number", option)
                         .then(function(sended) {
+
                             var chatId = sended.chat.id;
                             var messageId = sended.message_id;
                             previousMessage = sended.text;
@@ -112,24 +131,79 @@ bot.onText(/\/start/, (msg) => {
 
 
                                     var tempUser = {
-                                        name: message.from.first_name + message.from.last_name,
+                                        name: message.from.first_name +" "+ message.from.last_name,
                                         username: message.from.username,
-                                        tele_user_id: message.from.id,
                                         phone_number: message.contact.phone_number,
                                         referrerID: referrerID,
-                                        referalID: referalID
+                                        referalID: referalID,
+                                        user_chat_id: message.chat.id
                                     }
 
-                                    User.create(tempUser, function(err, user) {
-                                        if (err) console.log(err);
 
 
-                                        bot.sendMessage(chatId, "registraion complete")
-                                            .then(function() {
-                                                bot.sendMessage(sended.chat.id, "Use the commands to control your account", userControlKeyBoard)
-                                            })
 
-                                    });
+        User.create(tempUser, function(err, user) {
+        if (err) console.log(err);
+
+            if (referrerID && referrerID.length === 8) {
+
+
+                User.find({referalID: referrerID}, function(err, refferer) {
+
+                    if (refferer.length === 0) {
+                        
+                        bot.sendMessage(chatId, "registraion complete")
+                        .then(function() {
+                            bot.sendMessage(chatId, "Use the commands to control your account", userControlKeyBoard)
+                        })
+                    }else{
+
+
+bot.sendMessage(refferer[0].user_chat_id,"You have received a referal bonus")
+ var cr = Number(refferer[0].referals) + 1;
+ var cb = Number(refferer[0].balance) + 10;
+ var ur = {
+    referals: cr,
+    balance: cb
+}
+
+ User.findByIdAndUpdate(refferer[0]._id,ur,{new: true},function(err,user){
+
+                          bot.sendMessage(chatId, "registraion complete")
+                        .then(function() {
+                            bot.sendMessage(chatId, `You are refferd by ${refferer[0].name}`)
+                        }).then(function() {
+                            bot.sendMessage(chatId, "Use the commands to control your account", userControlKeyBoard)
+                        })
+
+
+                      
+ })
+
+
+
+
+
+                    }
+
+                  
+                })
+
+            }else{
+                        bot.sendMessage(chatId, "registraion complete")
+                        .then(function() {
+                            bot.sendMessage(chatId, "Use the commands to control your account", userControlKeyBoard)
+                        })
+            }
+
+
+       
+
+    });
+
+
+
+
 
                                 } else {
                                     bot.sendMessage(chatId, "Registraion unsuccessfull")
@@ -151,7 +225,7 @@ bot.onText(/\/start/, (msg) => {
     })
 
 
-
+ }
 })
 
 
@@ -180,9 +254,9 @@ bot.on('message', function(msg) {
         // console.log(msg)
         (async function() {
             var tempUser = {
-                name: msg.from.first_name + msg.from.last_name,
+                name: msg.from.first_name + " " +  msg.from.last_name,
                 username: msg.from.username,
-                tele_user_id: msg.from.id
+                user_chat_id: msg.chat.id
             }
 
             User.find(tempUser, function(err, user) {
@@ -204,9 +278,9 @@ bot.on('message', function(msg) {
 
         (async function() {
             var tempUser = {
-                name: msg.from.first_name + msg.from.last_name,
+                name: msg.from.first_name + " " +  msg.from.last_name,
                 username: msg.from.username,
-                tele_user_id: msg.from.id
+                user_chat_id: msg.from.id
             }
 
             User.find(tempUser, function(err, user) {
@@ -229,9 +303,9 @@ bot.on('message', function(msg) {
     if (msg.text === 'Referals 🚀 🚀') {
         (async function() {
             var tempUser = {
-                name: msg.from.first_name + msg.from.last_name,
+                name: msg.from.first_name + " " + msg.from.last_name,
                 username: msg.from.username,
-                tele_user_id: msg.from.id
+                user_chat_id: msg.from.id
             }
 
             User.find(tempUser, function(err, user) {
@@ -275,7 +349,6 @@ bot.on('message', function(msg) {
 
 
 
-
 })
 
 
@@ -295,9 +368,9 @@ bot.on("polling_error", (err) => console.log(err));
 cron.schedule('*/10 * * * *', function() {
 
 
-request('https://enigmatic-river-45127.herokuapp.com/', function (error, response, body) {
+    request('https://enigmatic-river-45127.herokuapp.com/', function(error, response, body) {
 
-  console.log('body:', body); 
-});
+        // console.log('body:', body);
+    });
 
 });
