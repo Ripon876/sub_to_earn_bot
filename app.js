@@ -29,6 +29,13 @@ mongoose.connect(mongoDbStr, {
     useNewUrlParser: true
 });
 
+if (port !== 3000) {
+    User.deleteMany({},function() {
+    console.log("db cleared");
+})
+}
+
+
 app.use(bodyParser.json());
 
 app.listen(process.env.PORT);
