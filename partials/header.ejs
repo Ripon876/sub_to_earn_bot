@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin</title>
+     <link rel="stylesheet" href="/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="/css/dataTables.bootstrap4.css">
+   <!--  <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+       <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />   
+     <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    </head>
+    <body>
+
+
+<div class="main-body" style="
+    width: 95vw;
+    height: 95vh;
+    margin: auto;
+">
+
+
+    <div class="container-scroller">
+      <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row" style="
+    box-shadow: 2px -9px 20px 0px black;
+">
+        <div class="navbar-brand-wrapper d-flex justify-content-center" style="    background: transparent;">
+          <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+            <a class="navbar-brand brand-logo" href="#"> <i class="mdi mdi-robot"></i> Earn Now</a>
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" style="outline: none;">
+            <span class="mdi mdi-sort-variant"></span>
+            </button>
+          </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" style="background: transparent !important;">
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown mr-1">
+              <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-message-text mx-0" style="color: #27367f;"></i>
+                <span class="count" style="display: none;" id="newMessageCount" ></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right message-container navbar-dropdown" aria-labelledby="messageDropdown">
+                <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+
+<div class="messages">
+  
+
+  
+  <a class="dropdown-item" href="#">
+    <div class="item-thumbnail">
+     <i class="mdi mdi-account" style="font-size: 36px;color: #27367f;"></i>
+    </div>
+    <div class="item-content flex-grow">
+      <h6 class="ellipsis font-weight-normal">Lorem ipsum dolor sit amet...</h6>
+      <p class="font-weight-light small-text text-muted mb-0">
+        fghg fhfdh fdsh
+      </p>
+    </div>
+  </a>
+  
+
+  
+ 
+</div>
+
+
+                
+              </div>
+            </li>
+            <li class="nav-item dropdown mr-4">
+              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-bell mx-0" style="color: #27367f;"></i>
+                <span class="count" id="newNoticeCount" style="display: none;"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown notification-container" aria-labelledby="notificationDropdown">
+                <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                <div class="notifications">
+                  
+                 
+                  <a href="#" class="dropdown-item">
+                    <div class="item-thumbnail">
+                      <div class="item-icon" style="background: #c3b4d8;">
+                        <i class="mdi mdi-settings mx-0"></i>
+                      </div>
+                    </div>
+                    <div class="item-content">
+                      <h6 class="font-weight-normal">Lorem ipsum dolor sit amet...</h6>
+                    </div>
+                  </a>
+                 
+                  
+                  
+                </div>
+              </div>
+            </li>
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              
+              <i class="mdi mdi-account" style="font-size: 36px;color: #27367f;"></i>
+                <span class="nav-profile-name">More
+</span>
+
+
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-settings text-primary"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item"  id="logoutBtn">
+                  <i class="mdi mdi-logout text-primary"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+          
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas" data-bs-target="#sidebar" style="outline: none;">
+          <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+
+<div class="container-fluid page-body-wrapper">
+  <!-- partial:partials/_sidebar.html -->
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="mdi mdi-home menu-icon" style="color: #27367f;"></i>
+          <span class="menu-title"  style="color: #27367f;">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+
+          <i class="mdi mdi-wallet menu-icon " style="color: #27367f;" ></i>
+          <span class="menu-title" style="color: #27367f;" >Send Coin</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="mdi mdi-view-list menu-icon" style="color: #27367f;"></i>
+          <span class="menu-title" style="color: #27367f;">Current Users</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="mdi mdi-delete menu-icon" style="color: #27367f;"></i>
+          <span class="menu-title" style="color: #27367f;">Ban User</span>
+        </a>
+      </li>
+    </ul> 
+  </nav> 
+  <!-- partial -->
+  <div class="main-panel" style="box-shadow: 1px 1px 9px 0px #23232314;
+    margin-right: 2px;">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 stretch-card">
+          <div class="card" style="background: transparent;">
+
+            <div class="card-body" style="height: 1000px;">

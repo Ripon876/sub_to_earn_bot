@@ -1,0 +1,76 @@
+<%- include("../partials/header") -%>
+
+
+<p class="card-title"  style="height: 38px !important;
+padding: 10px;">Current user under your area</p>
+
+<!-- <div class="mychart"></div>
+<div id="spark3" class="mt-4"></div> -->
+<div class="table-responsive chart">
+
+	<table id="recent-purchases-listing" class="table">
+		<thead>
+			<tr><td>Name</td><td>ID</td><td>Balance</td><td>Status</td></tr>
+		</thead>
+		<tbody>
+			<% users.forEach(function(user){ %>
+			<tr>
+				<td><%= user.name %></td>
+				<td><%= user._id %></td>
+				<td><%= user.balance %></td>
+				<td><% if(user.status){  %>
+					Active
+					<% }else{ %>
+					Not Active
+				<% } %></td>
+			</tr>
+			<%  }) %>
+		</tbody>
+	</table>
+
+<p class="card-title"  style="height: 38px !important;
+padding: 10px;">You have 4.34200 USDT</p>	
+<div class="send-coin m-auto w-75">
+	<div class="send-coin-form m-auto">
+<form id="send-coin">
+	<div class="mb-3">
+		<label for="user_id" class="form-label">User ID</label>
+		<input type="text" class="form-control" id="user_id">
+		
+	</div>
+	<div class="mb-3">
+		<label for="amount" class="form-label">Amount</label>
+		<input type="number" class="form-control" id="amount" min="0.5">
+	</div>
+	<button type="submit" class="btn btn-primary mb-5">Send</button>
+</form>
+	</div>
+</div>
+
+
+
+</div>
+
+<script>
+	$("#send-coin").on("submit",function(e) {
+e.preventDefault();
+
+		$.ajax({
+	url : '/send/coin',
+	type : 'POST',
+	data : {user_id : $("#user_id").val(),amount: $("#amount").val()},
+	success : function(result){
+
+console.log(result);
+
+
+	},
+	error : function(result, status, error){
+	console.log("something went wrong");
+	}
+		});	
+
+	})
+	
+</script>
+<%- include("../partials/footer") -%>

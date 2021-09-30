@@ -1,0 +1,190 @@
+
+       body {
+     background: url(https://templates.iqonic.design/glare/html/assets/images/background.png);
+    background-attachment: fixed;
+    background-size: cover;
+        }
+        /* Glassmorphism card effect */
+
+/*        .card {
+        height: 20vh !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(255, 255, 255, 0.61) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+        }
+*/
+
+       .card-title {
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        /*background-color: rgba(255, 255, 255, 0.61) !important;*/
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+        }
+
+#sidebar{
+     /*height: 100vh !important;*/
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(255, 255, 255, 0.61) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+        margin-right: 15px;
+        box-shadow: 1px 1px 9px 0px #23232314;
+        
+
+}
+.content-wrapper{
+     /*height: 100vh !important;*/
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(255, 255, 255, 0.61) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+}
+.message-container{
+     /*height: 100vh !important;*/
+        backdrop-filter: blur(4px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(255, 255, 255, 0.61) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+}
+.notification-container{
+     /*height: 100vh !important;*/
+        backdrop-filter: blur(4px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(255, 255, 255, 0.61) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+}
+
+.navbar-dropdown{
+     /*height: 100vh !important;*/
+        backdrop-filter: blur(4px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(255, 255, 255, 0.61) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+}
+.chart{
+     /*height: 100vh !important;*/
+        backdrop-filter: blur(4px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(255, 255, 255, 0.61) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(209, 213, 219, 0.3) !important;
+}
+a.count-indicator.nav-link:hover, a#profileDropdown:hover{
+  box-shadow: none !important;
+}
+
+a.nav-link:hover {
+    box-shadow: -1px 6px 20px 0px #928a8a80;
+    background: #ffffff33;
+}
+
+
+
+@media (max-width:991px) {
+.navbar .navbar-brand-wrapper{
+  border-right: none !important;
+}
+.navbar .navbar-brand-wrapper .navbar-brand.brand-logo{
+  display: block !important;
+}
+}
+
+
+.highcharts-background{
+  fill:  transparent;
+}
+.apexcharts-menu-icon{
+  display: none;
+}
+.apexcharts-toolbar{
+  display: none  !important;
+}
+
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+body::-webkit-scrollbar-track {
+  /*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+  background-color: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: #f8def5;
+  border-radius: 100%;
+   
+}
+.card-body{
+
+    height: 450px;
+
+}
+  
+
+.navbar-toggler .navbar-toggler-right{
+    outline: none !important;
+}
+.dropdown-menu.notification-container.show {
+	overflow-y: scroll;
+	height:300px;
+	 display: flex;
+    flex-direction: column;
+
+}
+
+.dropdown-menu.message-container.show {
+    overflow-y: scroll;
+    height:300px;
+     display: flex;
+    flex-direction: column;
+
+}
+.notifications {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+}
+.messages {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+}
+.showResult,.give_number {
+    width: 93%;
+    height: auto; 
+    top: 30%;
+    transform: translateY(-220px);
+    box-shadow: 1px 1px 44px 11px #0202029e;
+    background-color: white;
+}
+.give_number {
+    width: 53%;
+    height: auto; 
+    top: 30%;
+    transform: translateY(-220px);
+    box-shadow: 1px 1px 44px 11px #0202029e;
+    background-color: white;
+}
+#profileDropdown img {
+    width: 23px;
+    height: 23px;
+    background: #b8c3d0;
+    padding: 2px;
+}
+
+.searchResult{
+    position: absolute;
+    top: 85%;
+    /*left: 18.2%;*/
+    z-index: 2222;
+}
+.main-panel{
+      background: #f3f3f3;
+}
